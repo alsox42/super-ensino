@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+# Lista de Exercicios
 class ExerciseGroup(models.Model):
     text  = models.CharField("Nome da Lista?", max_length=150)
     the_amount = models.IntegerField("Quant. de Exerc.", default=0)
@@ -13,10 +14,11 @@ class ExerciseGroup(models.Model):
     def __str__(self):
         return self.text
 
-
+# Exercicio
 class Exercise(models.Model):
     exercise_group = models.ForeignKey("ExerciseGroup",
                                        verbose_name="Lista de Exercício",
+                                       related_name="exercises",
                                        on_delete=models.PROTECT,
                                        null=True)
     order_num   = models.CharField("Num. de Ordem", max_length=20)
@@ -33,6 +35,7 @@ class Exercise(models.Model):
         return self.order_num
     
 
+# Alternativas do exercicio
 class Alternative(models.Model):
     LETTER_CHOICE = (
         ('a', 'A'),
@@ -57,7 +60,7 @@ class Alternative(models.Model):
     def __str__(self):
         return self.text
 
-
+# Respostas do usuario
 class Answer(models.Model):
     user     = models.ForeignKey(User,
                                 verbose_name="Usuário",
@@ -67,6 +70,7 @@ class Answer(models.Model):
                                  on_delete=models.CASCADE)
     answered = models.ForeignKey("Alternative",
                                  verbose_name="Escolha do usuário",
+                                 related_name="answer",
                                  on_delete=models.CASCADE)
 
     class Meta:
