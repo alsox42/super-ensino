@@ -7,6 +7,7 @@ from api.services import exercises_service
 
 
 class ExerciseViewSet(ModelViewSet):
+
     queryset = exercises_service.list_exercises()
     serializer_class = exercises_serializer.ExerciseSerializer
     http_method_names = ['get']

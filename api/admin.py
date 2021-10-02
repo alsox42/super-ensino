@@ -14,10 +14,12 @@ class AnswerAdmin(admin.ModelAdmin):
 
 class AlternativeInlineAdmin(admin.StackedInline):
     model = Alternative
+    extra = 0
+    max_num = 4
 
 
 class ExerciseAdmin(admin.ModelAdmin):
-    list_display = ['order_num', 'title', 'description', 'question']
+    list_display = ['order_num', 'description', ]
     search_fields = ['order_num']
     list_filter = ['order_num']
 

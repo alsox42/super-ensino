@@ -22,9 +22,7 @@ class Exercise(models.Model):
                                        on_delete=models.PROTECT,
                                        null=True)
     order_num   = models.CharField("Num. de Ordem", max_length=20)
-    title       = models.CharField("Titulo", max_length=50)
     description = models.TextField("Descrição")
-    question   = models.CharField("Pergunta", max_length=100)
 
     class Meta:
         verbose_name = 'Exercicio'
@@ -55,6 +53,7 @@ class Alternative(models.Model):
     class Meta:
         verbose_name = 'Alternativa'
         verbose_name_plural = 'Alternativas'
+        unique_together = (('letter', 'exercise'),)
         ordering = ['letter']
 
     def __str__(self):
@@ -70,12 +69,12 @@ class Answer(models.Model):
                                  on_delete=models.CASCADE)
     answered = models.ForeignKey("Alternative",
                                  verbose_name="Escolha do usuário",
-                                 related_name="answer",
                                  on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Resposta'
         verbose_name_plural = 'Respostas'
+        unique_together = (('exercise', 'answered'),)
         ordering = ['user', 'exercise']
 
     def __str__(self):
