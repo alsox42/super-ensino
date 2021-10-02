@@ -10,7 +10,7 @@ from api.serializer.exercise_group_serializer import ExerciseGroupSerializer
 class ExerciseSerializer(serializers.ModelSerializer):
     exercise_group = ExerciseGroupSerializer()
     alternatives = AlternativeSerializer(source='alternative_set', many=True)
-    answer = AnswerGetSerializer(source='answer_set', many=True)
+    answer = AnswerGetSerializer(source='answer_set', many=True, )
 
     class Meta:
         model = Exercise

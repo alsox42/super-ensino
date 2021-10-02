@@ -74,7 +74,7 @@ class Answer(models.Model):
     class Meta:
         verbose_name = 'Resposta'
         verbose_name_plural = 'Respostas'
-        unique_together = (('exercise', 'answered'),)
+        unique_together = (('exercise', 'answered', 'user'),)
         ordering = ['user', 'exercise']
 
     def __str__(self):
